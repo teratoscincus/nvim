@@ -44,6 +44,7 @@ return {
         "python",
         "go",
         "java",
+        "kotlin",
 
         "sql",
 

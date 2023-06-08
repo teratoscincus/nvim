@@ -10,6 +10,8 @@ local Signs = true
 
 local Diagnostic_format = "[#{c}] #{m} (#{s})"
 
+local defaults = require("teratoscincus.config")
+
 return {
   -- Static language tools
   {
@@ -24,7 +26,7 @@ return {
       -- Mason config
       require("mason").setup({
         ui = {
-          border = "rounded",
+          border = defaults.window_border,
           icons = {
             package_installed = "✓",
             package_pending = "➜",
@@ -40,7 +42,7 @@ return {
       local formatting = null_ls.builtins.formatting
       local diagnostics = null_ls.builtins.diagnostics
       null_ls.setup({
-        border = "rounded", -- Options: "double", "rounded", "single", "shadow", "none"
+        border = defaults.window_border,
         diagnostic_config = { underline = Underline, virtual_text = Virtual_text, signs = Signs },
         diagnostics_format = Diagnostic_format,
         -- Listed sources will be automatically installed by `mason-null-ls`.
@@ -82,7 +84,14 @@ return {
           }),
 
           -- Java
+          diagnostics.checkstyle.with({
+            extra_args = { "-c", "/google_checks.xml" }, -- or "/sun_checks.xml" or path to self written rules.
+          }),
           formatting.google_java_format,
+
+          -- Kotlin
+          diagnostics.ktlint,
+          formatting.ktlint,
 
           -- Docker
           diagnostics.hadolint,
@@ -154,6 +163,7 @@ return {
           "pyright",
           "gopls",
           "jdtls",
+          "kotlin_language_server",
 
           "bashls",
           "dockerls",
@@ -161,6 +171,7 @@ return {
 
           "jsonls",
           "yamlls",
+          "lemminx",
 
           "lua_ls",
 
@@ -211,9 +222,9 @@ return {
 
       -- LSP_Signature settings
       require("lsp_signature").setup({
-        bind = true,          -- This is mandatory, otherwise border config won't get registered.
+        bind = true, -- This is mandatory, otherwise border config won't get registered.
         handler_opts = {
-          border = "rounded", -- Options: "double", "rounded", "single", "shadow", "none"
+          border = defaults.window_border,
         },
         toggle_key = "<C-s>", -- Toggle signature on and off in insert mode
       })
@@ -266,11 +277,11 @@ return {
         },
         window = {
           completion = cmp.config.window.bordered({
-            border = "rounded",
+            border = defaults.window_border,
             winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,CursorLine:PmenuSel,Search:None",
           }),
           documentation = cmp.config.window.bordered({
-            border = "rounded",
+            border = defaults.window_border,
             winhighlight = "Normal:NormalFloat,FloatBorder:FloatBorder,Search:None",
           }),
         },
@@ -301,6 +312,9 @@ return {
           },
         })
       )
+
+      -- Lsp UI
+      require("lspconfig.ui.windows").default_options.border = defaults.window_border
     end,
   },
 }

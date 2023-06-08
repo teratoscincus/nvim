@@ -5,6 +5,8 @@ local M = {}
 -- specify colorscheme
 M.colorscheme = "gruvbox_baby"
 
+M.window_border = "rounded" -- Options: "double", "rounded", "single", "shadow", "none"
+
 -- Icons used by other plugins
 M.icons = {
   diagnostics = {

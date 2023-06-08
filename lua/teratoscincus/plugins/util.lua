@@ -1,3 +1,5 @@
+local defaults = require("teratoscincus.config")
+
 return {
   -- Measure startuptime
   {
@@ -52,7 +54,7 @@ return {
       vim.o.timeoutlen = 300
       require("which-key").setup({
         window = {
-          border = "rounded",
+          border = defaults.window_border,
         },
       })
     end,

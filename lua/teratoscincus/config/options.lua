@@ -2,7 +2,6 @@
 --   See `:help vim.o`
 --   See `:help formatoptions` and `:help fo-table`
 local o = vim.opt
-local fo = vim.opt.formatoptions
 
 o.guicursor =
 "n-v-c-sm:block,ci-ve:ver100,r-cr-o:hor20,i:ver100-blinkwait700-blinkoff200-blinkon200-Cursor/lCursor"               -- Blinking line in insert
