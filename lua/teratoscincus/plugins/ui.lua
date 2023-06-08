@@ -24,7 +24,7 @@ return {
         sections = {
           lualine_a = { "mode" },
           lualine_b = { "branch" },
-          lualine_c = { -- TODO: Python venv
+          lualine_c = {
             {
               "diff",
               symbols = {
@@ -57,6 +57,16 @@ return {
                 info = icons.diagnostics.Info,
                 hint = icons.diagnostics.Hint,
               },
+            },
+            {
+              -- Display active LSP
+              function()
+                for _, client in ipairs(vim.lsp.buf_get_clients()) do
+                  if client.name ~= "null-ls" then
+                    return client.name
+                  end
+                end
+              end,
             },
           },
           lualine_y = {
