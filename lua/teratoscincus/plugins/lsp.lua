@@ -248,7 +248,7 @@ return {
           ["<C-Space>"] = cmp.mapping.complete({}),
           ["<Tab>"] = cmp.mapping.confirm({
             select = true,
-            behavior = cmp.ConfirmBehavior.Replace,
+            behavior = cmp.ConfirmBehavior.Insert,
           }),
           ["<C-n>"] = cmp.mapping(function(fallback)
             if cmp.visible() then
