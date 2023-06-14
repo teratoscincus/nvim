@@ -80,6 +80,7 @@ return {
       hl(0, "NormalFloat", { bg = floating_window_bg })
       hl(0, "FloatBorder", { bg = floating_window_bg, fg = primary })
       hl(0, "NullLsInfoBorder", { bg = floating_window_bg, fg = primary })
+      hl(0, "LspInfoBorder", { bg = floating_window_bg, fg = primary })
       hl(0, "Pmenu", { bg = floating_window_bg, fg = primary })
       hl(0, "PmenuSel", { fg = primary, bold = true })
       hl(0, "CmpItemAbbrMatch", { fg = search_match_fg })
@@ -169,6 +170,8 @@ return {
       -- Treesitter context
       hl(0, "TreesitterContext", { bg = cursor_line })
       hl(0, "TreesitterContextLineNumber", { bg = cursor_line, fg = colors.magenta, bold = true })
+
+      -- Mason  -- TODO: Specify highlight groups
 
       -- Lazy plugin manager
       hl(0, "LazyButtonActive", { bg = colors.medium_gray, fg = colors.bright_yellow })
