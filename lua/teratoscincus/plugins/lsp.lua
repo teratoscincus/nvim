@@ -132,6 +132,9 @@ return {
       { "williamboman/mason.nvim" },           -- Optional
       { "williamboman/mason-lspconfig.nvim" }, -- Optional
 
+      -- Java specific LSP
+      { "mfussenegger/nvim-jdtls" }, -- Optional
+
       -- Autocompletion
       { "hrsh7th/nvim-cmp" },         -- Required
       { "hrsh7th/cmp-nvim-lsp" },     -- Required
@@ -162,7 +165,7 @@ return {
 
           "pyright",
           "gopls",
-          "jdtls",
+          "jdtls", -- Needed for nvim-jdtls
           "kotlin_language_server",
 
           "bashls",
@@ -212,6 +215,10 @@ return {
       lsp.configure("html", {
         filetypes = { "html", "htmldjango" },
       })
+
+      -- Skip specific LSP server setup
+      -- Ignore jdtls in order for nvim-jdtls to have full control.
+      lsp.skip_server_setup({ "jdtls" })
 
       lsp.setup()
 
