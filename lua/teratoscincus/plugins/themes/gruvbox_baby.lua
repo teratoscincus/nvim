@@ -46,6 +46,7 @@ return {
       local constant_style = { fg = colors.pink, bold = true }
       local constructor_style = class_style
       local decorator_style = { fg = colors.bright_yellow, bold = true }
+      local annotation_style = { fg = colors.clean_green, bold = true }
       local field_style = { fg = colors.foreground }
       local function_style = { fg = colors.clean_green }
       local function_builtin_style = { fg = colors.orange }
@@ -105,15 +106,18 @@ return {
       hl(0, "@operator", operator_style)
       hl(0, "@variable", variable_style)
       hl(0, "@lsp.type.variable", variable_style)
+      hl(0, "@lsp.type.parameter.java", variable_style) -- Parameters in method code block
       hl(0, "@variable.builtin", variable_special_style)
       hl(0, "@lsp.type.property", property_style)
       hl(0, "@parameter", parameter_style)
-      hl(0, "@lst.type.parameter", parameter_style)
+      hl(0, "@lsp.type.parameter", parameter_style)
+      hl(0, "@lsp.typemod.parameter.declaration.java", parameter_style)
       hl(0, "@field", field_style)
       hl(0, "@lsp.type.class", class_style)
       hl(0, "@decorator", decorator_style)
       hl(0, "@lsp.type.decorator", decorator_style)
       hl(0, "@attribute.python", decorator_style) -- Decorator
+      hl(0, "@lsp.type.annotation.java", annotation_style)
       hl(0, "@type", type_style)
       hl(0, "@type.builtin", type_style)
       hl(0, "@boolean", boolean_style)
