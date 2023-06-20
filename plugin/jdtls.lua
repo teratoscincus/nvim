@@ -141,12 +141,12 @@ local function jdtls_on_attach(client, bufnr)
   -- https://github.com/mfussenegger/nvim-jdtls#usage
   local opts = { buffer = bufnr }
   vim.keymap.set("n", "<A-o>", "<cmd>lua require('jdtls').organize_imports()<cr>", opts)
-  vim.keymap.set("n", "ev", "<cmd>lua require('jdtls').extract_variable()<cr>", opts)          -- (E)ctract (v)ariable
-  vim.keymap.set("n", "ec", "<cmd>lua require('jdtls').extract_constant()<cr>", opts)          -- (E)ctract (c)onstant
+  vim.keymap.set("n", "<leader>ev", "<cmd>lua require('jdtls').extract_variable()<cr>", opts)          -- (E)ctract (v)ariable
+  vim.keymap.set("n", "<leader>ec", "<cmd>lua require('jdtls').extract_constant()<cr>", opts)          -- (E)ctract (c)onstant
 
-  vim.keymap.set("x", "ev", "<esc><cmd>lua require('jdtls').extract_variable(true)<cr>", opts) -- (E)ctract (v)ariable
-  vim.keymap.set("x", "ec", "<esc><cmd>lua require('jdtls').extract_constant(true)<cr>", opts) -- (E)ctract (c)onstant
-  vim.keymap.set("x", "em", "<esc><Cmd>lua require('jdtls').extract_method(true)<cr>", opts)   -- (E)ctract (m)ethod
+  vim.keymap.set("x", "<leader>ev", "<esc><cmd>lua require('jdtls').extract_variable(true)<cr>", opts) -- (E)ctract (v)ariable
+  vim.keymap.set("x", "<leader>ec", "<esc><cmd>lua require('jdtls').extract_constant(true)<cr>", opts) -- (E)ctract (c)onstant
+  vim.keymap.set("x", "<leader>em", "<esc><Cmd>lua require('jdtls').extract_method(true)<cr>", opts)   -- (E)ctract (m)ethod
 end
 
 local function jdtls_setup(event)
