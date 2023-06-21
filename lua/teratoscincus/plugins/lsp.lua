@@ -43,14 +43,21 @@ return {
       local diagnostics = null_ls.builtins.diagnostics
       null_ls.setup({
         border = defaults.window_border,
-        diagnostic_config = { underline = Underline, virtual_text = Virtual_text, signs = Signs },
+        diagnostic_config = {
+          underline = Underline,
+          virtual_text = Virtual_text,
+          signs = Signs,
+        },
         diagnostics_format = Diagnostic_format,
         -- Listed sources will be automatically installed by `mason-null-ls`.
         sources = {
           -- Shell script
-          diagnostics.shellcheck,
-          formatting.shellharden,
-          formatting.shfmt,
+          formatting.beautysh.with({ -- multiple shell languages
+            filetypes = { "zsh" },
+          }),
+          diagnostics.shellcheck, -- bash only
+          formatting.shellharden, -- bash only
+          formatting.shfmt,       -- bash only
 
           -- Lua
           diagnostics.luacheck.with({
@@ -84,10 +91,9 @@ return {
           }),
 
           -- Java
-          diagnostics.checkstyle.with({
-            extra_args = { "-c", "/google_checks.xml" }, -- or "/sun_checks.xml" or path to self written rules.
+          formatting.google_java_format.with({
+            extra_args = { "--aosp", "--skip-removing-unused-imports" },
           }),
-          formatting.google_java_format,
 
           -- Kotlin
           diagnostics.ktlint,

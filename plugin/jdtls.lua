@@ -226,7 +226,8 @@ local function jdtls_setup(event)
       --   }
       -- },
       format = {
-        enabled = true,
+        -- BUG: Cause cursor jump when enabled and using null_ls formatter together.
+        enabled = false,
         -- settings = {
         --   profile = "asdf"
         -- },
