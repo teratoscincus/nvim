@@ -130,9 +130,9 @@ return {
       hl(0, "@method.call", method_style)
       hl(0, "@function", function_style)
       hl(0, "@function.call", function_style)
-      hl(0, "@function.builtin", function_builtin_style)
       hl(0, "@lsp.type.function", function_style)
-      hl(0, "@lsp.type.function.lua", function_builtin_style) -- Builtin function
+      hl(0, "@function.builtin", function_builtin_style)
+      hl(0, "@lsp.typemod.function.defaultLibrary.lua", function_builtin_style)
       hl(0, "@label", lable_style)
 
       -- UI

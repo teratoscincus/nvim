@@ -1,4 +1,4 @@
-local defaults = require("teratoscincus.config")
+local defaults = require("config")
 
 return {
   -- Measure startuptime

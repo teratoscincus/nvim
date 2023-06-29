@@ -10,12 +10,46 @@ return {
     "nvim-lualine/lualine.nvim",
     event = "VeryLazy",
     opts = function(plugin)
-      local icons = require("teratoscincus.config").icons
-      local theme = require("teratoscincus.config.theme_lualine")
+      local icons = require("config").icons
 
       return {
         options = {
-          theme = theme,
+          theme = function()
+            local colors = require("gruvbox-baby.colors").config()
+
+            return {
+              normal = {
+                a = { bg = colors.milk, fg = colors.dark, gui = "bold" },
+                b = { bg = colors.medium_gray, fg = colors.milk },
+                c = { bg = colors.background, fg = colors.milk },
+              },
+              insert = {
+                a = { bg = colors.bright_yellow, fg = colors.dark, gui = "bold" },
+                b = { bg = colors.medium_gray, fg = colors.milk },
+                c = { bg = colors.background, fg = colors.milk },
+              },
+              visual = {
+                a = { bg = colors.orange, fg = colors.dark, gui = "bold" },
+                b = { bg = colors.medium_gray, fg = colors.milk },
+                c = { bg = colors.background, fg = colors.milk },
+              },
+              replace = {
+                a = { bg = colors.red, fg = colors.dark, gui = "bold" },
+                b = { bg = colors.medium_gray, fg = colors.milk },
+                c = { bg = colors.background, fg = colors.milk },
+              },
+              command = {
+                a = { bg = colors.clean_green, fg = colors.dark, gui = "bold" },
+                b = { bg = colors.medium_gray, fg = colors.milk },
+                c = { bg = colors.background, fg = colors.milk },
+              },
+              inactive = {
+                a = { bg = colors.dark_gray, fg = colors.gray, gui = "bold" },
+                b = { bg = colors.dark_gray, fg = colors.gray },
+                c = { bg = colors.dark_gray, fg = colors.gray },
+              },
+            }
+          end,
           component_separators = "|", -- Suggestions: { left = "", right = ""}, "|"
           section_separators = "",    -- Suggestions: { left = "", right = ""}, ""
           globalstatus = true,
@@ -28,9 +62,9 @@ return {
             {
               "diff",
               symbols = {
-                added = icons.git.added,
-                modified = icons.git.modified,
-                removed = icons.git.removed,
+                added = icons.git.Added,
+                modified = icons.git.Modified,
+                removed = icons.git.Removed,
               },
             },
             {
@@ -45,23 +79,27 @@ return {
             {
               "filename",
               path = 1,
-              symbols = { modified = "  ", readonly = "", unnamed = "" },
+              symbols = {
+                modified = icons.current_buffer.modified,
+                readonly = icons.current_buffer.readonly,
+                unnamed = icons.current_buffer.unnamed,
+              },
             },
           },
           lualine_x = {
             {
               "diagnostics",
               symbols = {
-                error = icons.diagnostics.Error,
-                warn = icons.diagnostics.Warn,
-                info = icons.diagnostics.Info,
-                hint = icons.diagnostics.Hint,
+                error = icons.diagnostics.error.Icon,
+                warn = icons.diagnostics.warn.Icon,
+                info = icons.diagnostics.info.Icon,
+                hint = icons.diagnostics.hint.Icon,
               },
             },
             {
               -- Display active LSP
               function()
-                for _, client in ipairs(vim.lsp.buf_get_clients()) do
+                for _, client in ipairs(vim.lsp.get_active_clients()) do
                   if client.name ~= "null-ls" then
                     return client.name
                   end

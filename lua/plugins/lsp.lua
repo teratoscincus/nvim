@@ -1,16 +1,5 @@
--- Signs used in gutter
-local Error_sign = "E"
-local Warn_sign = "W"
-local Hint_sing = "h"
-local Info_sign = "i"
-
-local Underline = true
-local Virtual_text = true
-local Signs = true
-
-local Diagnostic_format = "[#{c}] #{m} (#{s})"
-
-local defaults = require("teratoscincus.config")
+local config = require("config")
+local icons = require("config").icons
 
 return {
   -- Static language tools
@@ -26,11 +15,11 @@ return {
       -- Mason config
       require("mason").setup({
         ui = {
-          border = defaults.window_border,
+          border = config.window_border,
           icons = {
-            package_installed = "✓",
-            package_pending = "➜",
-            package_uninstalled = "✗",
+            package_installed = icons.mason.Installed,
+            package_pending = icons.mason.Pending,
+            package_uninstalled = icons.mason.Uninstalled,
           },
         },
       })
@@ -42,13 +31,13 @@ return {
       local formatting = null_ls.builtins.formatting
       local diagnostics = null_ls.builtins.diagnostics
       null_ls.setup({
-        border = defaults.window_border,
+        border = config.window_border,
         diagnostic_config = {
-          underline = Underline,
-          virtual_text = Virtual_text,
-          signs = Signs,
+          underline = config.diagnostic.options.underline,
+          virtual_text = config.diagnostic.options.virtual_text,
+          signs = config.diagnostic.options.signs,
         },
-        diagnostics_format = Diagnostic_format,
+        diagnostics_format = config.diagnostic.format,
         -- Listed sources will be automatically installed by `mason-null-ls`.
         sources = {
           -- Shell script
@@ -196,11 +185,12 @@ return {
         suggest_lsp_servers = true,
       })
 
+      -- LSP gutter icons
       lsp.set_sign_icons({
-        error = Error_sign,
-        warn = Warn_sign,
-        hint = Hint_sing,
-        info = Info_sign,
+        error = icons.diagnostics.error.Char,
+        warn = icons.diagnostics.warn.Char,
+        hint = icons.diagnostics.hint.Char,
+        info = icons.diagnostics.info.Char,
       })
 
       -- (Optional) Configure lua language server for neovim
@@ -230,14 +220,14 @@ return {
 
       -- Diagnostic notifications
       vim.diagnostic.config({
-        virtual_text = Virtual_text,
+        virtual_text = config.diagnostic.options.virtual_text,
       })
 
       -- LSP_Signature settings
       require("lsp_signature").setup({
         bind = true, -- This is mandatory, otherwise border config won't get registered.
         handler_opts = {
-          border = defaults.window_border,
+          border = config.window_border,
         },
         toggle_key = "<C-s>", -- Toggle signature on and off in insert mode
       })
@@ -290,11 +280,11 @@ return {
         },
         window = {
           completion = cmp.config.window.bordered({
-            border = defaults.window_border,
+            border = config.window_border,
             winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,CursorLine:PmenuSel,Search:None",
           }),
           documentation = cmp.config.window.bordered({
-            border = defaults.window_border,
+            border = config.window_border,
             winhighlight = "Normal:NormalFloat,FloatBorder:FloatBorder,Search:None",
           }),
         },
@@ -327,7 +317,16 @@ return {
       )
 
       -- Lsp UI
-      require("lspconfig.ui.windows").default_options.border = defaults.window_border
+      require("lspconfig.ui.windows").default_options.border = config.window_border
+      vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
+        border = config.window_border,
+      })
     end,
+  },
+
+  -- Make lua_ls aware of the nvim lua API
+  {
+    "folke/neodev.nvim",
+    opts = {},
   },
 }

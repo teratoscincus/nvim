@@ -13,14 +13,14 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
-local defaults = require("teratoscincus.config")
+local defaults = require("config")
 
 -- Manage plugins
 require("lazy").setup({
   spec = {
-    -- Any lua file in the /nvim/lua/teratoscincus/plugins/ directory will be
+    -- Any lua file in the /nvim/lua/plugins/ directory will be
     -- automatically merged in the main plugin spec.
-    { import = "teratoscincus.plugins" },
+    { import = "plugins" },
   },
   install = {
     colorscheme = { "gruvbox-baby" },

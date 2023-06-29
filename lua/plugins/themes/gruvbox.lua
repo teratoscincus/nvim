@@ -45,7 +45,7 @@ return {
           Operator = { fg = colors.aqua },
           Constant = { fg = colors.purple, bold = true },
         },
-        dim_inactive = true, -- TODO: What does this do?
+        dim_inactive = true,
         transparent_mode = false,
       })
 
