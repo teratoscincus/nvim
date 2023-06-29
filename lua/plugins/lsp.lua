@@ -180,8 +180,8 @@ return {
       -- LSP-Zero settings
       local lsp = require("lsp-zero").preset({
         name = "minimal",
-        set_lsp_keymaps = true,
-        manage_nvim_cmp = false,
+        set_lsp_keymaps = false, -- Define my own
+        manage_nvim_cmp = false, -- Define my own
         suggest_lsp_servers = true,
       })
 

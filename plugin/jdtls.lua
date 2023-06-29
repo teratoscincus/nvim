@@ -145,33 +145,9 @@ local function jdtls_on_attach(client, bufnr)
   map("n", "<leader>ev", "<cmd>lua require('jdtls').extract_variable()<cr>", opts)          -- (E)ctract (v)ariable
   map("n", "<leader>ec", "<cmd>lua require('jdtls').extract_constant()<cr>", opts)          -- (E)ctract (c)onstant
 
-  map("x", "<leader>ev", "<esc><cmd>lua require('jdtls').extract_variable(true)<cr>", opts) -- (E)ctract (v)ariable
-  map("x", "<leader>ec", "<esc><cmd>lua require('jdtls').extract_constant(true)<cr>", opts) -- (E)ctract (c)onstant
-  map("x", "<leader>em", "<esc><cmd>lua require('jdtls').extract_method(true)<cr>", opts)   -- (E)ctract (m)ethod
-
-  -- TODO: Centralize below keymaps
-  -- Use here and for lsp-zero.
-  map("n", "K", "<cmd>lua vim.lsp.buf.hover()<cr>")
-  map("n", "gd", "<cmd>lua vim.lsp.buf.definition()<cr>")
-  map("n", "gD", "<cmd>lua vim.lsp.buf.declaration()<cr>")
-  map("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<cr>")
-  map("n", "go", "<cmd>lua vim.lsp.buf.type_definition()<cr>")
-  map("n", "gr", "<cmd>lua vim.lsp.buf.references()<cr>")
-  map("n", "gs", "<cmd>lua vim.lsp.buf.signature_help()<cr>")
-  map("n", "<F2>", "<cmd>lua vim.lsp.buf.rename()<cr>")
-  map("n", "<F3>", "<cmd>lua vim.lsp.buf.format({async = true})<cr>")
-  map("x", "<F3>", "<cmd>lua vim.lsp.buf.format({async = true})<cr>")
-  map("n", "<F4>", "<cmd>lua vim.lsp.buf.code_action()<cr>")
-
-  if vim.lsp.buf.range_code_action then
-    map("x", "<F4>", "<cmd>lua vim.lsp.buf.range_code_action()<cr>")
-  else
-    map("x", "<F4>", "<cmd>lua vim.lsp.buf.code_action()<cr>")
-  end
-
-  map("n", "gl", "<cmd>lua vim.diagnostic.open_float()<cr>")
-  map("n", "[d", "<cmd>lua vim.diagnostic.goto_prev()<cr>")
-  map("n", "]d", "<cmd>lua vim.diagnostic.goto_next()<cr>")
+  map("v", "<leader>ev", "<esc><cmd>lua require('jdtls').extract_variable(true)<cr>", opts) -- (E)ctract (v)ariable
+  map("v", "<leader>ec", "<esc><cmd>lua require('jdtls').extract_constant(true)<cr>", opts) -- (E)ctract (c)onstant
+  map("v", "<leader>em", "<esc><cmd>lua require('jdtls').extract_method(true)<cr>", opts)   -- (E)ctract (m)ethod
 end
 
 local function jdtls_setup(event)
