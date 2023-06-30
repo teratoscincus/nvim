@@ -159,15 +159,18 @@ local function jdtls_on_attach(client, bufnr)
   local wk = require("which-key")
   wk.register({
     mode = { "n", "v" },
-    ["e"] = { name = "+extract" },
+    ["<leader>c"] = {
+      name = "code",
+      ["e"] = { name = "+extract" },
+    },
   })
   map("n", "<A-o>", "<cmd>lua require('jdtls').organize_imports()<cr>", opts(_opts, "Organize imports"))
-  map("n", "<leader>ev", "<cmd>lua require('jdtls').extract_variable()<cr>", opts(_opts, "Extract variable"))
-  map("n", "<leader>ec", "<cmd>lua require('jdtls').extract_constant()<cr>", opts(_opts, "Extract constant"))
+  map("n", "<leader>cev", "<cmd>lua require('jdtls').extract_variable()<cr>", opts(_opts, "Extract variable"))
+  map("n", "<leader>cec", "<cmd>lua require('jdtls').extract_constant()<cr>", opts(_opts, "Extract constant"))
 
-  map("v", "<leader>ev", "<esc><cmd>lua require('jdtls').extract_variable(true)<cr>", opts(_opts, "Extract variable"))
-  map("v", "<leader>ec", "<esc><cmd>lua require('jdtls').extract_constant(true)<cr>", opts(_opts, "Extract constant"))
-  map("v", "<leader>em", "<esc><cmd>lua require('jdtls').extract_method(true)<cr>", opts(_opts, "Extract method"))
+  map("v", "<leader>cev", "<esc><cmd>lua require('jdtls').extract_variable(true)<cr>", opts(_opts, "Extract variable"))
+  map("v", "<leader>cec", "<esc><cmd>lua require('jdtls').extract_constant(true)<cr>", opts(_opts, "Extract constant"))
+  map("v", "<leader>cem", "<esc><cmd>lua require('jdtls').extract_method(true)<cr>", opts(_opts, "Extract method"))
 end
 
 local function jdtls_setup(event)

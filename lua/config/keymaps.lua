@@ -25,22 +25,41 @@ vim.api.nvim_create_autocmd("LspAttach", {
   group = vim.api.nvim_create_augroup("UserLspConfig", {}),
   callback = function(ev)
     local opts = require("util").opts
-    _opts = { buffer = ev.buf }
+    local _opts = { buffer = ev.buf }
 
     -- Buffer local mappings.
     -- See `:help vim.lsp.*` for documentation on any of the below functions
     map("n", "K", vim.lsp.buf.hover, opts(_opts, "Hover"))
     map("n", "<C-k>", vim.lsp.buf.signature_help, opts(_opts, "Signature help"))
-    map("n", "gd", vim.lsp.buf.definition, opts(_opts, "Goto definition"))
-    map("n", "gD", vim.lsp.buf.declaration, opts(_opts, "Goto declaration"))
-    map("n", "go", vim.lsp.buf.type_definition, opts(_opts, "Goto type definition"))
-    -- TODO: Conform below to initial key after SPACE
-    map("n", "<leader>rn", vim.lsp.buf.rename, opts(_opts, "Rename"))
+    map("n", "gd", vim.lsp.buf.definition, opts(_opts, "Definition"))
+    map("n", "gD", vim.lsp.buf.declaration, opts(_opts, "Declaration"))
+    map("n", "go", vim.lsp.buf.type_definition, opts(_opts, "Type definition"))
+
+    local wk = require("which-key")
+    wk.register({
+      mode = { "n", "v" },
+      ["<leader>c"] = {
+        name = "code",
+      },
+    })
+    map("n", "<leader>cr", vim.lsp.buf.rename, opts(_opts, "Rename"))
     map("n", "<leader>ca", vim.lsp.buf.code_action, opts(_opts, "Code action"))
     if vim.lsp.buf.range_code_action then
       map("v", "<leader>ca", vim.lsp.buf.range_code_action, opts(_opts, "Code action (range)"))
     else
       map("v", "<leader>ca", vim.lsp.buf.code_action, opts(_opts, "Code action"))
     end
+
+    -- Telescope
+    local builtin = require("telescope.builtin")
+    wk.register({
+      ["<leader>f"] = {
+        name = "+find",
+        ["l"] = { name = "+LSP" },
+      },
+    })
+    map("n", "<leader>flt", builtin.treesitter, { desc = "Treesitter nodes" })
+    map("n", "<leader>fli", builtin.lsp_implementations, opts(_opts, "Implementation"))
+    map("n", "<leader>flr", builtin.lsp_references, opts(_opts, "References"))
   end,
 })
