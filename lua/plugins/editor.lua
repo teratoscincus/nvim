@@ -1,3 +1,5 @@
+local map = vim.keymap.set
+
 return {
   -- Multiple cursors
   {
@@ -7,20 +9,20 @@ return {
 
   -- Fuzzy finder
   {
-    "nvim-telescope/telescope.nvim",
+    "nvim-telescope/telescope.nvim", -- TODO: Change border chars
     version = "*",
     dependencies = { "nvim-lua/plenary.nvim" },
     config = function()
       local builtin = require("telescope.builtin")
 
       -- Keymaps
-      vim.keymap.set("n", "<leader>ff", builtin.find_files, {}) -- (f)uzzy (f)ind project files
-      vim.keymap.set("n", "<leader>fg", builtin.git_files, {})  -- (f)uzzy find (g)it files
-      vim.keymap.set("n", "<leader>fs", function()              -- (f)uzzy (s)tring project files search
+      map("n", "<leader>ff", builtin.find_files, { desc = "Find files" })
+      map("n", "<leader>fg", builtin.git_files, { desc = "Find git files" })
+      map("n", "<leader>fs", function()
         builtin.grep_string({ search = vim.fn.input("Grep > ") })
-      end)
-      vim.keymap.set("n", "<leader>fb", builtin.buffers, {})   -- (f)uzzi find (b)uffers
-      vim.keymap.set("n", "<leader>fh", builtin.help_tags, {}) -- (f)uzzy find (h)elp
+      end, { desc = "Find string" })
+      map("n", "<leader>fb", builtin.buffers, { desc = "Find buffers" })
+      map("n", "<leader>fh", builtin.help_tags, { desc = "Find help tags" })
     end,
   },
 
@@ -32,22 +34,22 @@ return {
       local mark = require("harpoon.mark")
       local ui = require("harpoon.ui")
 
-      vim.keymap.set("n", "<leader>ha", mark.add_file)        -- (h)arpoon (a)dd
-      vim.keymap.set("n", "<leader>he", ui.toggle_quick_menu) -- (h)arpoon (e)xplore
+      map("n", "<leader>fh", mark.add_file, { desc = "Harpoon file" })
+      map("n", "<leader>oh", ui.toggle_quick_menu, { desc = "Harpoon explorer" })
 
       -- Select files in quick menu
-      vim.keymap.set("n", "<C-s>", function()
+      map("n", "<C-s>", function()
         ui.nav_file(1)
-      end)
-      vim.keymap.set("n", "<C-t>", function()
+      end, { desc = "Harpoon 1" })
+      map("n", "<C-t>", function()
         ui.nav_file(2)
-      end)
-      vim.keymap.set("n", "<C-f>", function()
+      end, { desc = "Harpoon 2" })
+      map("n", "<C-f>", function()
         ui.nav_file(3)
-      end)
-      vim.keymap.set("n", "<C-p>", function()
+      end, { desc = "Harpoon 3" })
+      map("n", "<C-p>", function()
         ui.nav_file(4)
-      end)
+      end, { desc = "Harpoon 4" })
     end,
   },
 
@@ -56,7 +58,7 @@ return {
     "mbbill/undotree",
     event = { "BufReadPost", "BufNewFile" },
     config = function()
-      vim.keymap.set("n", "<leader>tut", vim.cmd.UndotreeToggle) -- (t)oggle (u)ndo (t)ree
+      map("n", "<leader>tut", vim.cmd.UndotreeToggle, { desc = "Undotree" })
     end,
   },
 
@@ -69,22 +71,37 @@ return {
     event = { "BufReadPost", "BufNewFile" },
     config = function()
       -- Keymaps
-      vim.keymap.set("n", "<leader>!!", "<cmd>TroubleToggle<cr>", { silent = true, noremap = true })
-      vim.keymap.set(
+      map("n", "<leader>!!", "<cmd>TroubleToggle<cr>", { silent = true, noremap = true, desc = "Trouble" })
+      map(
         "n",
         "<leader>!w",
         "<cmd>TroubleToggle workspace_diagnostics<cr>",
-        { silent = true, noremap = true }
+        { silent = true, noremap = true, desc = "Trouble workspace" }
       )
-      vim.keymap.set(
+      map(
         "n",
         "<leader>!d",
         "<cmd>TroubleToggle document_diagnostics<cr>",
-        { silent = true, noremap = true }
+        { silent = true, noremap = true, desc = "Trouble document" }
       )
-      vim.keymap.set("n", "<leader>xl", "<cmd>TroubleToggle loclist<cr>", { silent = true, noremap = true })
-      vim.keymap.set("n", "<leader>xq", "<cmd>TroubleToggle quickfix<cr>", { silent = true, noremap = true })
-      vim.keymap.set("n", "<leader>xlsp", "<cmd>TroubleToggle lsp_references<cr>", { silent = true, noremap = true })
+      map(
+        "n",
+        "<leader>!l",
+        "<cmd>TroubleToggle loclist<cr>",
+        { silent = true, noremap = true, desc = "Trouble local" }
+      )
+      map(
+        "n",
+        "<leader>!q",
+        "<cmd>TroubleToggle quickfix<cr>",
+        { silent = true, noremap = true, desc = "Trouble quickfix" }
+      )
+      map(
+        "n",
+        "<leader>!r",
+        "<cmd>TroubleToggle lsp_references<cr>",
+        { silent = true, noremap = true, desc = "Trouble LSP references" }
+      )
     end,
   },
 
@@ -113,7 +130,7 @@ return {
     config = function()
       require("nvim_comment").setup({
         comment_empty = false,
-        -- Keymapings
+        -- Keymapings  -- TODO: Add descriptions, and conform to inital key after SPACE
         line_mapping = "gcc",             -- Normal mode mapping left hand side
         operator_mapping = "gc",          -- Visual/Operator mapping left hand side
         comment_chunk_text_object = "ic", -- text object mapping, comment chunk

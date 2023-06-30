@@ -107,11 +107,13 @@ return {
       hl(0, "@variable", variable_style)
       hl(0, "@lsp.type.variable", variable_style)
       hl(0, "@lsp.type.parameter.java", variable_style) -- Parameters in method code block
+      hl(0, "@lsp.type.parameter.lua", variable_style)  -- Parameters in method code block
       hl(0, "@variable.builtin", variable_special_style)
       hl(0, "@lsp.type.property", property_style)
       hl(0, "@parameter", parameter_style)
       hl(0, "@lsp.type.parameter", parameter_style)
       hl(0, "@lsp.typemod.parameter.declaration.java", parameter_style)
+      hl(0, "@lsp.typemod.parameter.declaration.lua", parameter_style)
       hl(0, "@field", field_style)
       hl(0, "@lsp.type.class", class_style)
       hl(0, "@decorator", decorator_style)

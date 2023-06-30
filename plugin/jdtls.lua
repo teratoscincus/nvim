@@ -106,6 +106,8 @@ local function get_jdtls_paths()
   return path
 end
 
+local map = vim.keymap.set
+
 local function enable_codelens(bufnr)
   pcall(vim.lsp.codelens.refresh)
 
@@ -123,9 +125,13 @@ local function enable_debugger(bufnr)
   require("jdtls").setup_dap({ hotcodereplace = "auto" })
   require("jdtls.dap").setup_dap_main_class_configs()
 
-  local opts = { buffer = bufnr }
-  vim.keymap.set("n", "<leader>df", "<cmd>lua require('jdtls').test_class()<cr>", opts)
-  vim.keymap.set("n", "<leader>dn", "<cmd>lua require('jdtls').test_nearest_method()<cr>", opts)
+  local function opts(desc) -- TODO: refactor and use vim.tbl_extend()
+    return { buffer = bufnr, desc = desc }
+  end
+
+  local wk = require("which-key") -- TODO: Decide on keymap prefix letter and register
+  map("n", "<leader>df", "<cmd>lua require('jdtls').test_class()<cr>", opts("Test class"))
+  map("n", "<leader>dn", "<cmd>lua require('jdtls').test_nearest_method()<cr>", opts("Test nearest method"))
 end
 
 local function jdtls_on_attach(client, bufnr)
@@ -139,15 +145,23 @@ local function jdtls_on_attach(client, bufnr)
 
   -- The following mappings are based on the suggested usage of nvim-jdtls
   -- https://github.com/mfussenegger/nvim-jdtls#usage
-  local opts = { buffer = bufnr }
-  local map = vim.keymap.set
-  map("n", "<A-o>", "<cmd>lua require('jdtls').organize_imports()<cr>", opts)
-  map("n", "<leader>ev", "<cmd>lua require('jdtls').extract_variable()<cr>", opts)          -- (E)ctract (v)ariable
-  map("n", "<leader>ec", "<cmd>lua require('jdtls').extract_constant()<cr>", opts)          -- (E)ctract (c)onstant
+  -- Add individual values to desc field
+  local function opts(desc) -- TODO: refactor and use vim.tbl_extend()
+    return { buffer = bufnr, desc = desc }
+  end
 
-  map("v", "<leader>ev", "<esc><cmd>lua require('jdtls').extract_variable(true)<cr>", opts) -- (E)ctract (v)ariable
-  map("v", "<leader>ec", "<esc><cmd>lua require('jdtls').extract_constant(true)<cr>", opts) -- (E)ctract (c)onstant
-  map("v", "<leader>em", "<esc><cmd>lua require('jdtls').extract_method(true)<cr>", opts)   -- (E)ctract (m)ethod
+  local wk = require("which-key")
+  wk.register({
+    mode = { "n", "v" },
+    ["e"] = { name = "+extract" },
+  })
+  map("n", "<A-o>", "<cmd>lua require('jdtls').organize_imports()<cr>", opts("Organize imports"))
+  map("n", "<leader>ev", "<cmd>lua require('jdtls').extract_variable()<cr>", opts("Extract variable"))
+  map("n", "<leader>ec", "<cmd>lua require('jdtls').extract_constant()<cr>", opts("Extract constant"))
+
+  map("v", "<leader>ev", "<esc><cmd>lua require('jdtls').extract_variable(true)<cr>", opts("Extract variable"))
+  map("v", "<leader>ec", "<esc><cmd>lua require('jdtls').extract_constant(true)<cr>", opts("Extract constant"))
+  map("v", "<leader>em", "<esc><cmd>lua require('jdtls').extract_method(true)<cr>", opts("Extract method"))
 end
 
 local function jdtls_setup(event)

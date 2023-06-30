@@ -35,8 +35,8 @@ return {
       })
       -- Keybinds
       local sm = require("session_manager")
-      vim.keymap.set("n", "<leader>sls", sm.load_last_session)
-      vim.keymap.set("n", "<leader>sll", sm.load_session)
+      vim.keymap.set("n", "<leader>os", sm.load_last_session, { desc = "Resume last session" })
+      vim.keymap.set("n", "<leader>ls", sm.load_session, { desc = "List sessions" })
     end,
   },
 
@@ -52,10 +52,22 @@ return {
     config = function()
       vim.o.timeout = true
       vim.o.timeoutlen = 300
-      require("which-key").setup({
+      local wk = require("which-key")
+      wk.setup({
         window = {
           border = defaults.window_border,
         },
+      })
+      wk.register({ -- TODO: Decide on grouping prefixes and complete list
+        mode = { "n", "v" },
+        ["g"] = { name = "+goto" },
+        ["]"] = { name = "+next" },
+        ["["] = { name = "+prev" },
+        ["<leader>!"] = { name = "+diagnostics/quickfixes" },
+        ["<leader>f"] = { name = "+find" },
+        ["<leader>o"] = { name = "+open" },
+        ["<leader>t"] = { name = "+toggle" },
+        ["<leader>l"] = { name = "+list" },
       })
     end,
   },
@@ -100,7 +112,7 @@ return {
 
       -- Keybinds
       require("telescope").load_extension("neoclip")
-      vim.keymap.set("n", "<leader>cl", ":Telescope neoclip<CR>")
+      vim.keymap.set("n", "<leader>lc", ":Telescope neoclip<CR>", { desc = "List clipboard history" })
     end,
   },
 }
