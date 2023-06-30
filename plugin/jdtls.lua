@@ -125,13 +125,19 @@ local function enable_debugger(bufnr)
   require("jdtls").setup_dap({ hotcodereplace = "auto" })
   require("jdtls.dap").setup_dap_main_class_configs()
 
-  local function opts(desc) -- TODO: refactor and use vim.tbl_extend()
-    return { buffer = bufnr, desc = desc }
-  end
+  local opts = require("util").opts
+  local _opts = { buffer = bufnr }
 
-  local wk = require("which-key") -- TODO: Decide on keymap prefix letter and register
-  map("n", "<leader>df", "<cmd>lua require('jdtls').test_class()<cr>", opts("Test class"))
-  map("n", "<leader>dn", "<cmd>lua require('jdtls').test_nearest_method()<cr>", opts("Test nearest method"))
+  -- Keymaps
+  local wk = require("which-key")
+  wk.register({
+    ["<leader>d"] = {
+      name = "+debugger",
+      ["t"] = { name = "+test" },
+    },
+  })
+  map("n", "<leader>dtc", "<cmd>lua require('jdtls').test_class()<cr>", opts(_opts, "Test class"))
+  map("n", "<leader>dtm", "<cmd>lua require('jdtls').test_nearest_method()<cr>", opts(_opts, "Test nearest method"))
 end
 
 local function jdtls_on_attach(client, bufnr)
@@ -146,22 +152,22 @@ local function jdtls_on_attach(client, bufnr)
   -- The following mappings are based on the suggested usage of nvim-jdtls
   -- https://github.com/mfussenegger/nvim-jdtls#usage
   -- Add individual values to desc field
-  local function opts(desc) -- TODO: refactor and use vim.tbl_extend()
-    return { buffer = bufnr, desc = desc }
-  end
+  local opts = require("util").opts
+  local _opts = { buffer = bufnr }
 
+  -- Keymaps
   local wk = require("which-key")
   wk.register({
     mode = { "n", "v" },
     ["e"] = { name = "+extract" },
   })
-  map("n", "<A-o>", "<cmd>lua require('jdtls').organize_imports()<cr>", opts("Organize imports"))
-  map("n", "<leader>ev", "<cmd>lua require('jdtls').extract_variable()<cr>", opts("Extract variable"))
-  map("n", "<leader>ec", "<cmd>lua require('jdtls').extract_constant()<cr>", opts("Extract constant"))
+  map("n", "<A-o>", "<cmd>lua require('jdtls').organize_imports()<cr>", opts(_opts, "Organize imports"))
+  map("n", "<leader>ev", "<cmd>lua require('jdtls').extract_variable()<cr>", opts(_opts, "Extract variable"))
+  map("n", "<leader>ec", "<cmd>lua require('jdtls').extract_constant()<cr>", opts(_opts, "Extract constant"))
 
-  map("v", "<leader>ev", "<esc><cmd>lua require('jdtls').extract_variable(true)<cr>", opts("Extract variable"))
-  map("v", "<leader>ec", "<esc><cmd>lua require('jdtls').extract_constant(true)<cr>", opts("Extract constant"))
-  map("v", "<leader>em", "<esc><cmd>lua require('jdtls').extract_method(true)<cr>", opts("Extract method"))
+  map("v", "<leader>ev", "<esc><cmd>lua require('jdtls').extract_variable(true)<cr>", opts(_opts, "Extract variable"))
+  map("v", "<leader>ec", "<esc><cmd>lua require('jdtls').extract_constant(true)<cr>", opts(_opts, "Extract constant"))
+  map("v", "<leader>em", "<esc><cmd>lua require('jdtls').extract_method(true)<cr>", opts(_opts, "Extract method"))
 end
 
 local function jdtls_setup(event)
@@ -241,7 +247,7 @@ local function jdtls_setup(event)
       --   }
       -- },
       format = {
-        -- BUG: Cause cursor jump when enabled and using null_ls formatter together.
+        -- WARN: Cause cursor jump when enabled and using null_ls formatter together.
         enabled = false,
         -- settings = {
         --   profile = "asdf"

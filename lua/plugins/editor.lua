@@ -48,9 +48,8 @@ return {
         group = vim.api.nvim_create_augroup("UserLspConfig", {}),
         callback = function(ev)
           -- Add individual values to desc field
-          local function opts(desc) -- TODO: refactor and use vim.tbl_extend()
-            return { buffer = ev.buf, desc = desc }
-          end
+          local opts = require("util").opts
+          local _opts = { buffer = ev.buf }
 
           wk.register({
             ["<leader>f"] = {
@@ -60,8 +59,8 @@ return {
           })
 
           map("n", "<leader>flt", builtin.treesitter, { desc = "List Treesitter nodes" })
-          map("n", "<leader>fli", builtin.lsp_implementations, opts("List implementation"))
-          map("n", "<leader>flr", builtin.lsp_references, opts("List references"))
+          map("n", "<leader>fli", builtin.lsp_implementations, opts(_opts, "List implementation"))
+          map("n", "<leader>flr", builtin.lsp_references, opts(_opts, "List references"))
         end,
       })
     end,

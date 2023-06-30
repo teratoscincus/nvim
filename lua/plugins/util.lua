@@ -63,7 +63,7 @@ return {
         ["g"] = { name = "+goto" },
         ["]"] = { name = "+next" },
         ["["] = { name = "+prev" },
-        ["<leader>!"] = { name = "+diagnostics/quickfixes/todo" },
+        ["<leader>!"] = { name = "+diagnostics/quickfixes" },
         ["<leader>f"] = { name = "+find" },
         ["<leader>o"] = { name = "+open" },
         ["<leader>t"] = { name = "+toggle" },

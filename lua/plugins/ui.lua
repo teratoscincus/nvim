@@ -183,7 +183,7 @@ return {
       -- Keymaps
       local map = vim.keymap.set
 
-      map("n", "<leader>!c", ":TodoTelescope keywords=TODO,FIX,FIXME,BUG,HACK<cr>", { desc = "Todo comments" })
+      map("n", "<leader>fc", ":TodoTelescope keywords=TODO,FIX,FIXME,BUG,HACK<cr>", { desc = "Todo comments" })
     end,
   },
 
