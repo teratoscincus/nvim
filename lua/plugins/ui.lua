@@ -173,9 +173,17 @@ return {
   -- Todo-comments
   {
     "folke/todo-comments.nvim",
-    dependencies = "nvim-lua/plenary.nvim",
+    dependencies = {
+      "nvim-lua/plenary.nvim",         -- Required
+      "nvim-telescope/telescope.nvim", -- Optional
+    },
     config = function()
       require("todo-comments").setup({})
+
+      -- Keymaps
+      local map = vim.keymap.set
+
+      map("n", "<leader>!c", ":TodoTelescope keywords=TODO,FIX,FIXME,BUG,HACK<cr>", { desc = "Todo comments" })
     end,
   },
 
