@@ -68,6 +68,7 @@ return {
         ["<leader>o"] = { name = "+open" },
         ["<leader>t"] = { name = "+toggle" },
         ["<leader>l"] = { name = "+list" },
+        ["<leader>g"] = { name = "+git" },
       })
     end,
   },

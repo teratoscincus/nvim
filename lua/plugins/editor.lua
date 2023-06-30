@@ -14,15 +14,56 @@ return {
     dependencies = { "nvim-lua/plenary.nvim" },
     config = function()
       local builtin = require("telescope.builtin")
+      local wk = require("which-key")
 
       -- Keymaps
+      -- Finding
+      wk.register({
+        ["<leader>f"] = {
+          name = "+find",
+          ["t"] = { name = "+Telescope" },
+          ["g"] = { name = "+git" },
+        },
+      })
+
+      map("n", "<leader>ftr", builtin.resume, { desc = "Resume last Telescope picker" })
+      map("n", "<leader>ftp", builtin.pickers, { desc = "Find prev Telescope pickers" })
       map("n", "<leader>ff", builtin.find_files, { desc = "Find files" })
-      map("n", "<leader>fg", builtin.git_files, { desc = "Find git files" })
       map("n", "<leader>fs", function()
         builtin.grep_string({ search = vim.fn.input("Grep > ") })
       end, { desc = "Find string" })
       map("n", "<leader>fb", builtin.buffers, { desc = "Find buffers" })
       map("n", "<leader>fh", builtin.help_tags, { desc = "Find help tags" })
+
+      -- Suggestions
+      map("n", "<leader>!s", builtin.spell_suggest, { desc = "Spell suggest" })
+
+      -- Git
+      map("n", "<leader>fgf", builtin.git_files, { desc = "Find git files" })
+      map("n", "<leader>fgc", builtin.git_commits, { desc = "Git commits diff preview" })
+
+      -- LSP
+      -- Requires a language server to be attached
+      vim.api.nvim_create_autocmd("LspAttach", {
+        group = vim.api.nvim_create_augroup("UserLspConfig", {}),
+        callback = function(ev)
+          -- Add individual values to desc field
+          local function opts(desc) -- TODO: refactor and use vim.tbl_extend()
+            return { buffer = ev.buf, desc = desc }
+          end
+
+          wk.register({
+            ["<leader>f"] = {
+              name = "+find",
+              ["l"] = { name = "+LSP" },
+            },
+          })
+
+          map("n", "<leader>flt", builtin.treesitter, { desc = "List Treesitter nodes" })
+          map("n", "<leader>fli", builtin.lsp_implementations, opts("List implementation"))
+          map("n", "<leader>flr", builtin.lsp_references, opts("List references"))
+        end,
+      })
     end,
   },
 

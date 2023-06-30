@@ -38,8 +38,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
     map("n", "gD", vim.lsp.buf.declaration, opts("Goto declaration"))
     map("n", "go", vim.lsp.buf.type_definition, opts("Goto type definition"))
     -- TODO: Conform below to initial key after SPACE
-    map("n", "<leader>li", vim.lsp.buf.implementation, opts("List implementation"))
-    map("n", "<leader>lr", vim.lsp.buf.references, opts("List references"))
     map("n", "<leader>rn", vim.lsp.buf.rename, opts("Rename"))
     map("n", "<leader>ca", vim.lsp.buf.code_action, opts("Code action"))
     if vim.lsp.buf.range_code_action then
