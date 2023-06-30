@@ -41,28 +41,6 @@ return {
       -- Git
       map("n", "<leader>fgf", builtin.git_files, { desc = "Find git files" })
       map("n", "<leader>fgc", builtin.git_commits, { desc = "Git commits diff preview" })
-
-      -- LSP
-      -- Requires a language server to be attached
-      vim.api.nvim_create_autocmd("LspAttach", {
-        group = vim.api.nvim_create_augroup("UserLspConfig", {}),
-        callback = function(ev)
-          -- Add individual values to desc field
-          local opts = require("util").opts
-          local _opts = { buffer = ev.buf }
-
-          wk.register({
-            ["<leader>f"] = {
-              name = "+find",
-              ["l"] = { name = "+LSP" },
-            },
-          })
-
-          map("n", "<leader>flt", builtin.treesitter, { desc = "List Treesitter nodes" })
-          map("n", "<leader>fli", builtin.lsp_implementations, opts(_opts, "List implementation"))
-          map("n", "<leader>flr", builtin.lsp_references, opts(_opts, "List references"))
-        end,
-      })
     end,
   },
 
@@ -170,11 +148,12 @@ return {
     config = function()
       require("nvim_comment").setup({
         comment_empty = false,
-        -- Keymapings  -- TODO: Add descriptions, and conform to inital key after SPACE
-        line_mapping = "gcc",             -- Normal mode mapping left hand side
-        operator_mapping = "gc",          -- Visual/Operator mapping left hand side
-        comment_chunk_text_object = "ic", -- text object mapping, comment chunk
+        create_mappings = false,
       })
+
+      -- Keymaps
+      map("n", "<leader>/", ":CommentToggle<cr>", { desc = "(Un)Comment line" })
+      map("v", "<leader>/", ":'<,'>CommentToggle<cr>", { desc = "(Un)Comment visual selection" })
     end,
   },
 }
