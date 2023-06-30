@@ -6,6 +6,11 @@ local M = {}
 M.colorscheme = "gruvbox_baby"
 
 M.window_border = "single" -- Options: "none", "single", "double", "rounded", "solid", "shadow"
+local borderchars = {
+  ["single"] = { "─", "│", "─", "│", "┌", "┐", "┘", "└" },
+  ["rounded"] = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
+}
+M.borderchars = borderchars[M.window_border]
 
 M.diagnostic = {
   format = "[#{c}] #{m} (#{s})",

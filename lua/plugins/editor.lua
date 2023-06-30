@@ -13,11 +13,16 @@ return {
     version = "*",
     dependencies = { "nvim-lua/plenary.nvim" },
     config = function()
+      require("telescope").setup({
+        defaults = {
+          borderchars = require("config").borderchars,
+        },
+      })
+
       local builtin = require("telescope.builtin")
       local wk = require("which-key")
 
       -- Keymaps
-      -- Finding
       wk.register({
         ["<leader>f"] = {
           name = "+find",
@@ -26,6 +31,7 @@ return {
         },
       })
 
+      -- Finding
       map("n", "<leader>ftr", builtin.resume, { desc = "Resume last Telescope picker" })
       map("n", "<leader>ftp", builtin.pickers, { desc = "Find prev Telescope pickers" })
       map("n", "<leader>ff", builtin.find_files, { desc = "Find files" })
