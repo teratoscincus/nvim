@@ -15,7 +15,7 @@ return {
       return {
         options = {
           theme = function()
-            local colors = require("gruvbox-baby.colors").config()
+            local colors = require("gruvbox-baby.colors").config(require("gruvbox-baby.config"))
 
             return {
               normal = {
@@ -24,7 +24,7 @@ return {
                 c = { bg = colors.background, fg = colors.milk },
               },
               insert = {
-                a = { bg = colors.bright_yellow, fg = colors.dark, gui = "bold" },
+                a = { bg = colors.secondary, fg = colors.dark, gui = "bold" },
                 b = { bg = colors.medium_gray, fg = colors.milk },
                 c = { bg = colors.background, fg = colors.milk },
               },
