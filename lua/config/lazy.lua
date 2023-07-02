@@ -13,7 +13,7 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
-local defaults = require("config")
+local config = require("config")
 
 -- Manage plugins
 require("lazy").setup({
@@ -23,9 +23,9 @@ require("lazy").setup({
     { import = "plugins" },
   },
   install = {
-    colorscheme = { "gruvbox-baby" },
+    colorscheme = { config.colorscheme },
   },
   ui = {
-    border = defaults.window_border,
+    border = config.window_border,
   },
 })

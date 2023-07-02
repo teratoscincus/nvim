@@ -1,12 +1,13 @@
 local M = {}
 
 -- Set colorscheme
--- Use name of lua file in the `nvim/lua/plugins/themes` directory to specify
+-- Use name of lua file in the `nvim/lua/plugins/themes/` directory to specify
 -- colorscheme.
-M.colorscheme = "gruvbox_baby"
+M.colorscheme = "gruvbox-baby"
 
 M.window_border = "single" -- Options: "none", "single", "double", "rounded", "solid", "shadow"
 local borderchars = {
+  ["none"] = { " ", " ", " ", " ", " ", " ", " ", " " },
   ["single"] = { "─", "│", "─", "│", "┌", "┐", "┘", "└" },
   ["rounded"] = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
 }
