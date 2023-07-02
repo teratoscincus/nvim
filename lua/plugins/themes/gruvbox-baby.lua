@@ -21,13 +21,17 @@ return {
         light_blue = "#83a598",
         blue_gray = "#83a598",
       }
-      -- Define Custom color fields
+
+      local config = require("gruvbox-baby.config")
+      local c = require("gruvbox-baby.colors")
+      local colors = c.config(config)
+
+      -- Define Custom colors
       vim.g.gruvbox_baby_color_overrides = {
-        primary = require("gruvbox-baby.colors").config(require("gruvbox-baby.config")).orange,
-        secondary = require("gruvbox-baby.colors").config(require("gruvbox-baby.config")).light_blue,
+        primary = colors.orange,
+        secondary = colors.light_blue,
         cursor_line = "#2D2D2D", -- Slightly lighter than bg
-        floating_window_bg = require("gruvbox-baby.colors").config(require("gruvbox-baby.config")).background,
-        search_match_fg = require("gruvbox-baby.colors").config(require("gruvbox-baby.config")).light_blue,
+        floating_window_bg = colors.background,
       }
 
       -- Use above settings
@@ -35,9 +39,9 @@ return {
 
       -- Override highlights
 
-      local config = require("gruvbox-baby.config")
-      local c = require("gruvbox-baby.colors")
-      local colors = c.config(config)
+      config = require("gruvbox-baby.config")
+      c = require("gruvbox-baby.colors")
+      colors = c.config(config)
 
       -- Diagnostic underline color an style
       local diagnostic_underline_style = { sp = colors.error_red, undercurl = true }
@@ -86,8 +90,8 @@ return {
       hl(0, "LspInfoBorder", { bg = colors.floating_window_bg, fg = colors.primary })
       hl(0, "Pmenu", { bg = colors.floating_window_bg, fg = colors.primary })
       hl(0, "PmenuSel", { fg = colors.primary, bold = true })
-      hl(0, "CmpItemAbbrMatch", { fg = colors.search_match_fg })
-      hl(0, "CmpItemAbbrMatchFuzzy", { fg = colors.search_match_fg })
+      hl(0, "CmpItemAbbrMatch", { fg = colors.secondary })
+      hl(0, "CmpItemAbbrMatchFuzzy", { fg = colors.secondary })
       hl(0, "CmpItemKindClass", class_style)
       hl(0, "CmpItemKindConstant", constant_style)
       hl(0, "CmpItemKindField", field_style)
@@ -163,7 +167,7 @@ return {
 
       -- Telescope
       hl(0, "TelescopeBorder", { fg = colors.primary })
-      hl(0, "TelescopeMatching", { fg = colors.search_match_fg })
+      hl(0, "TelescopeMatching", { fg = colors.secondary })
       hl(0, "TelescopeSelection", { bg = colors.floating_window_bg, fg = colors.primary, bold = true })
       hl(0, "TelescopeSelectionCaret", { fg = colors.primary, bold = true })
       hl(0, "TelescopePromptTitle", { bold = true })
@@ -179,13 +183,18 @@ return {
       hl(0, "TreesitterContext", { bg = colors.cursor_line })
       hl(0, "TreesitterContextLineNumber", { bg = colors.cursor_line, fg = colors.magenta, bold = true })
 
-      -- Mason  -- TODO: Specify highlight groups
+      -- Mason
+      hl(0, "MasonHeader", { bg = colors.primary, fg = colors.background, bold = true })
+      hl(0, "MasonHighlightBlockBold", { bg = colors.cursor_line, fg = colors.primary })
+      hl(0, "MasonMutedBlock", { bg = colors.cursor_line, fg = colors.secondary })
+      hl(0, "MasonHeading", { fg = colors.primary, bold = true })
+      hl(0, "MasonHighlight", { fg = colors.secondary, bold = true })
 
       -- Lazy plugin manager
-      hl(0, "LazyButtonActive", { bg = colors.medium_gray, fg = colors.bright_yellow })
-      hl(0, "LazyButton", { bg = colors.cursor_line, fg = colors.soft_yellow })
-      hl(0, "LazyH1", { bg = colors.medium_gray, fg = colors.bright_yellow })
-      hl(0, "LazyH2", { fg = colors.soft_yellow, bold = true })
+      hl(0, "LazyButtonActive", { bg = colors.cursor_line, fg = colors.primary })
+      hl(0, "LazyButton", { bg = colors.cursor_line, fg = colors.secondary })
+      hl(0, "LazyH1", { bg = colors.cursor_line, fg = colors.primary })
+      hl(0, "LazyH2", { fg = colors.primary, bold = true })
       hl(0, "LazySpecial", { fg = colors.comment })
     end,
   },
