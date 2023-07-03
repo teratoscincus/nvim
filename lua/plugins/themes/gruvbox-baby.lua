@@ -165,6 +165,15 @@ return {
       hl(0, "TSRainbowGreen", { fg = "#98971a" }) -- Different to not confuse with string
       hl(0, "TSRainbowCyan", { fg = colors.forest_green })
 
+      -- Netrw
+      hl(0, "netrwHelpCmd", { fg = colors.primary })
+      hl(0, "netrwCmdSep", { fg = colors.comment })
+      hl(0, "netrwQuickHelp", { fg = colors.secondary })
+      hl(0, "netrwCmdNote", { fg = colors.secondary })
+      hl(0, "netrwList", { fg = colors.secondary })
+      hl(0, "netrwExe", { fg = colors.clean_green, bold = true })
+      hl(0, "netrwClassify", { fg = colors.foreground })
+
       -- Telescope
       hl(0, "TelescopeBorder", { fg = colors.primary })
       hl(0, "TelescopeMatching", { fg = colors.secondary })
