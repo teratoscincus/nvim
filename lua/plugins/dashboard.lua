@@ -15,8 +15,8 @@ return {
 
       local function button(sc, txt, keybind, keybind_opts)
         local b = dashboard.button(sc, txt, keybind, keybind_opts)
-        b.opts.hl = "Comment"
-        b.opts.hl_shortcut = "Comment"
+        b.opts.hl = "AlphaButton"
+        b.opts.hl_shortcut = "AlphaShortcut"
         return b
       end
 
@@ -51,8 +51,8 @@ return {
 
       dashboard.section.header.opts.margin = 20
 
-      dashboard.section.header.opts.hl = "Function"
-      dashboard.section.footer.opts.hl = "Function"
+      dashboard.section.header.opts.hl = "AlphaHeader"
+      dashboard.section.footer.opts.hl = "AlphaFooter"
 
       alpha.setup(dashboard.opts)
     end,

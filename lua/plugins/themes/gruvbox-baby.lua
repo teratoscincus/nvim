@@ -196,6 +196,12 @@ return {
       hl(0, "LazyH1", { bg = colors.cursor_line, fg = colors.primary })
       hl(0, "LazyH2", { fg = colors.primary, bold = true })
       hl(0, "LazySpecial", { fg = colors.comment })
+
+      -- Alpha dashboard
+      hl(0, "AlphaHeader", { fg = colors.primary })
+      hl(0, "AlphaFooter", { fg = colors.primary })
+      hl(0, "AlphaButton", { fg = colors.comment })
+      hl(0, "AlphaShortcut", { fg = colors.comment })
     end,
   },
 }
