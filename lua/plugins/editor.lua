@@ -16,6 +16,9 @@ return {
       require("telescope").setup({
         defaults = {
           borderchars = require("config").borderchars,
+          file_ignore_patterns = {
+            "__pycache__/",
+          },
         },
       })
 
