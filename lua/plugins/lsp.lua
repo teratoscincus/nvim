@@ -81,7 +81,7 @@ return {
 
           -- Java
           formatting.google_java_format.with({
-            extra_args = { "--aosp", "--skip-removing-unused-imports" },
+            extra_args = { "--aosp" },
           }),
 
           -- Kotlin
