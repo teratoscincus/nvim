@@ -164,7 +164,7 @@ local function jdtls_on_attach(client, bufnr)
       ["e"] = { name = "+extract" },
     },
   })
-  map("n", "<A-o>", "<cmd>lua require('jdtls').organize_imports()<cr>", opts(_opts, "Organize imports"))
+  map("n", "<leader>co", "<cmd>lua require('jdtls').organize_imports()<cr>", opts(_opts, "Organize imports"))
   map("n", "<leader>cev", "<cmd>lua require('jdtls').extract_variable()<cr>", opts(_opts, "Extract variable"))
   map("n", "<leader>cec", "<cmd>lua require('jdtls').extract_constant()<cr>", opts(_opts, "Extract constant"))
 

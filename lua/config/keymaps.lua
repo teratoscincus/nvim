@@ -17,7 +17,7 @@ map("v", "J", ":m '>+1<CR>gv=gv", { desc = "Move block down" })
 map("v", "K", ":m '>-2<CR>gv=gv", { desc = "Move block up" }) -- TODO: Does not work with more than one line
 
 -- LSP
-map("n", "gl", "<cmd>lua vim.diagnostic.open_float()<cr>", { desc = "Open float" })
+map("n", "<leader>!f", "<cmd>lua vim.diagnostic.open_float()<cr>", { desc = "Open float" })
 map("n", "[d", "<cmd>lua vim.diagnostic.goto_prev()<cr>", { desc = "Previous diagnostic" })
 map("n", "]d", "<cmd>lua vim.diagnostic.goto_next()<cr>", { desc = "Next diagnostic" })
 
