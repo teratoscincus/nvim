@@ -56,6 +56,7 @@ return {
       local field_style = { fg = colors.foreground }
       local function_style = { fg = colors.clean_green }
       local function_builtin_style = { fg = colors.orange }
+      local interface_style = { fg = colors.soft_green }
       local keyword_style = { fg = colors.red }
       local enum_style = keyword_style
       local lable_style = { fg = colors.light_blue }
@@ -104,7 +105,7 @@ return {
       -- Window separator
       hl(0, "WinSeparator", { fg = colors.primary })
 
-      -- Override treesitter capture groups
+      -- Override treesitter & LSP capture groups
       hl(0, "@lsp.type.enum", enum_style)
       hl(0, "@punctuation.delimiter", punctuation_delimiter_style)
       hl(0, "@punctuation.bracket", punctuation_bracket_style)
@@ -112,20 +113,20 @@ return {
       hl(0, "@operator", operator_style)
       hl(0, "@variable", variable_style)
       hl(0, "@lsp.type.variable", variable_style)
-      hl(0, "@lsp.type.parameter.java", variable_style) -- Parameters in method code block
-      hl(0, "@lsp.type.parameter.lua", variable_style)  -- Parameters in method code block
-      hl(0, "@variable.builtin", variable_special_style)
-      hl(0, "@lsp.type.property", property_style)
+      hl(0, "@lsp.typemod.property.readonly", constant_style)
+      hl(0, "@lsp.type.parameter", variable_style) -- Parameters in method code block
       hl(0, "@parameter", parameter_style)
       hl(0, "@lsp.type.parameter", parameter_style)
-      hl(0, "@lsp.typemod.parameter.declaration.java", parameter_style)
-      hl(0, "@lsp.typemod.parameter.declaration.lua", parameter_style)
+      hl(0, "@lsp.typemod.parameter.declaration", parameter_style)
+      hl(0, "@variable.builtin", variable_special_style)
+      hl(0, "@lsp.type.property", property_style)
       hl(0, "@field", field_style)
       hl(0, "@lsp.type.class", class_style)
+      hl(0, "@lsp.type.interface", interface_style)
       hl(0, "@decorator", decorator_style)
       hl(0, "@lsp.type.decorator", decorator_style)
       hl(0, "@attribute.python", decorator_style) -- Decorator
-      hl(0, "@lsp.type.annotation.java", annotation_style)
+      hl(0, "@lsp.type.annotation", annotation_style)
       hl(0, "@type", type_style)
       hl(0, "@type.builtin", type_style)
       hl(0, "@boolean", boolean_style)
