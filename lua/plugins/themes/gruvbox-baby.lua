@@ -116,7 +116,6 @@ return {
       hl(0, "@lsp.typemod.property.readonly", constant_style)
       hl(0, "@lsp.type.parameter", variable_style) -- Parameters in method code block
       hl(0, "@parameter", parameter_style)
-      hl(0, "@lsp.type.parameter", parameter_style)
       hl(0, "@lsp.typemod.parameter.declaration", parameter_style)
       hl(0, "@variable.builtin", variable_special_style)
       hl(0, "@lsp.type.property", property_style)
