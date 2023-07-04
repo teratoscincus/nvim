@@ -164,10 +164,10 @@ return {
 
       -- Rainbow-brackets
       hl(0, "RainbowDelimiterRed", { fg = colors.red })
-      hl(0, "RainbowDelimiterGreen", { fg = "#98971a" }) -- Different to not confuse with string
+      hl(0, "RainbowDelimiterCyan", { fg = "#98971a" }) -- Different to not confuse with string
       hl(0, "RainbowDelimiterYellow", { fg = colors.soft_yellow })
       hl(0, "RainbowDelimiterBlue", { fg = colors.blue_gray })
-      hl(0, "RainbowDelimiterCyan", { fg = colors.forest_green })
+      hl(0, "RainbowDelimiterGreen", { fg = colors.forest_green })
       hl(0, "RainbowDelimiterViolet", { fg = colors.magenta })
       hl(0, "RainbowDelimiterOrange", { fg = colors.orange })
 
