@@ -91,32 +91,33 @@ return {
 
   -- Rainbow-brackets
   {
-    "HiPhish/nvim-ts-rainbow2",
+    "hiphish/rainbow-delimiters.nvim",
     config = function()
-      require("nvim-treesitter.configs").setup({
-        rainbow = {
-          enable = true,
-          -- Disable plugin for these languages
-          disable = {
-            "html",
-            "htmldjango",
-            "markdown",
-            "markdown_inline",
-          },
-          -- Which query to use for finding delimiters
-          query = "rainbow-parens",
-          -- Highlight the entire buffer all at once
-          strategy = require("ts-rainbow").strategy.global,
-          hlgroups = {
-            "TSRainbowViolet",
-            "TSRainbowBlue",
-            "TSRainbowCyan",
-            "TSRainbowGreen",
-            "TSRainbowYellow",
-            "TSRainbowOrange",
-          },
+      local rainbow_delimiters = require("rainbow-delimiters")
+      vim.g.rainbow_delimiters = {
+        strategy = {
+          [""] = rainbow_delimiters.strategy["global"],
+
+          -- Disable for filetypes
+          html = rainbow_delimiters.strategy["noop"],
+          htmldjango = rainbow_delimiters.strategy["noop"],
+          markdown = rainbow_delimiters.strategy["noop"],
+          markdown_inline = rainbow_delimiters.strategy["noop"],
         },
-      })
+        -- Which query to use for finding delimiters
+        query = {
+          [""] = "rainbow-delimiters",
+          lua = "rainbow-blocks",
+        },
+        highlight = {
+          "RainbowDelimiterViolet",
+          "RainbowDelimiterBlue",
+          "RainbowDelimiterCyan",
+          "RainbowDelimiterGreen",
+          "RainbowDelimiterYellow",
+          "RainbowDelimiterOrange",
+        },
+      }
     end,
   },
 

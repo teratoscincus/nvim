@@ -20,6 +20,7 @@ map("v", "K", ":m '>-2<CR>gv=gv", { desc = "Move block up" }) -- TODO: Does not 
 map("n", "gl", "<cmd>lua vim.diagnostic.open_float()<cr>", { desc = "Open float" })
 map("n", "[d", "<cmd>lua vim.diagnostic.goto_prev()<cr>", { desc = "Previous diagnostic" })
 map("n", "]d", "<cmd>lua vim.diagnostic.goto_next()<cr>", { desc = "Next diagnostic" })
+
 -- Requires a language server to be attached
 vim.api.nvim_create_autocmd("LspAttach", {
   group = vim.api.nvim_create_augroup("UserLspConfig", {}),
