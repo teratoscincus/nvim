@@ -60,21 +60,29 @@ return {
     config = function()
       local mark = require("harpoon.mark")
       local ui = require("harpoon.ui")
+      local wk = require("which-key")
 
-      map("n", "<leader>fh", mark.add_file, { desc = "Harpoon file" })
-      map("n", "<leader>oh", ui.toggle_quick_menu, { desc = "Harpoon explorer" })
+      -- Keymaps
+      wk.register({
+        ["<leader>h"] = {
+          name = "+harpoon",
+        },
+      })
+
+      map("n", "<leader>ha", mark.add_file, { desc = "Harpoon file" })
+      map("n", "<leader>he", ui.toggle_quick_menu, { desc = "Harpoon explorer" })
 
       -- Select files in quick menu
-      map("n", "<C-s>", function()
+      map("n", "<A-n>", function()
         ui.nav_file(1)
       end, { desc = "Harpoon 1" })
-      map("n", "<C-t>", function()
+      map("n", "<A-e>", function()
         ui.nav_file(2)
       end, { desc = "Harpoon 2" })
-      map("n", "<C-f>", function()
+      map("n", "<A-i>", function()
         ui.nav_file(3)
       end, { desc = "Harpoon 3" })
-      map("n", "<C-p>", function()
+      map("n", "<A-o>", function()
         ui.nav_file(4)
       end, { desc = "Harpoon 4" })
     end,
