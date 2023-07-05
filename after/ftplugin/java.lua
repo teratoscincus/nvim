@@ -8,7 +8,6 @@ o.smarttab = true
 o.shiftwidth = 4
 o.tabstop = 4
 o.softtabstop = 4
--- o.textwidth = 88
-o.colorcolumn = "89"
+o.colorcolumn = "101"
 
 fo:remove("o")
