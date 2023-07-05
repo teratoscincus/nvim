@@ -47,6 +47,7 @@ return {
       local diagnostic_underline_style = { sp = colors.error_red, undercurl = true }
 
       -- Syntax highlight colors and styles
+      local abstract_style = { italic = true }
       local boolean_style = { fg = colors.pink }
       local class_style = { fg = colors.bright_yellow }
       local constant_style = { fg = colors.pink, bold = true }
@@ -56,11 +57,12 @@ return {
       local field_style = { fg = colors.foreground }
       local function_style = { fg = colors.clean_green }
       local function_builtin_style = { fg = colors.orange }
-      local interface_style = { fg = colors.soft_green }
+      local interface_style = { fg = colors.soft_green, italic = true }
       local keyword_style = { fg = colors.red }
       local enum_style = keyword_style
       local lable_style = { fg = colors.light_blue }
       local method_style = { fg = colors.clean_green }
+      local abstract_method_style = { fg = colors.clean_green, italic = true }
       local number_style = { fg = colors.pink }
       local operator_style = { fg = colors.clean_green }
       local parameter_style = { fg = colors.light_blue }
@@ -123,6 +125,7 @@ return {
       hl(0, "@lsp.type.property", property_style)
       hl(0, "@field", field_style)
       hl(0, "@lsp.type.class", class_style)
+      hl(0, "@lsp.typemod.class.abstract", abstract_style)
       hl(0, "@lsp.type.interface", interface_style)
       hl(0, "@decorator", decorator_style)
       hl(0, "@lsp.type.decorator", decorator_style)
@@ -135,6 +138,7 @@ return {
       hl(0, "@float", number_style)
       hl(0, "@string", string_style)
       hl(0, "@constructor", constructor_style)
+      hl(0, "@lsp.mod.constructor", constructor_style)
       hl(0, "@method", method_style)
       hl(0, "@lsp.type.method", method_style)
       hl(0, "@method.call", method_style)
@@ -144,6 +148,9 @@ return {
       hl(0, "@function.builtin", function_builtin_style)
       hl(0, "@lsp.typemod.function.defaultLibrary.lua", function_builtin_style)
       hl(0, "@label", lable_style)
+      hl(0, "@text.title", { fg = colors.primary })
+      hl(0, "@text.emphasis", { fg = colors.primary, italic = true })
+      hl(0, "@text.strong", { fg = colors.primary, bold = true })
 
       -- UI
       hl(0, "VirtColumn", { link = "IndentBlanklineChar" })
