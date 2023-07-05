@@ -94,6 +94,7 @@ return {
       hl(0, "CmpItemAbbrMatch", { fg = colors.secondary })
       hl(0, "CmpItemAbbrMatchFuzzy", { fg = colors.secondary })
       hl(0, "CmpItemKindClass", class_style)
+      hl(0, "CmpItemKindInterface", interface_style)
       hl(0, "CmpItemKindConstant", constant_style)
       hl(0, "CmpItemKindField", field_style)
       hl(0, "CmpItemKindFunction", function_style)
@@ -101,6 +102,7 @@ return {
       hl(0, "CmpItemKindMethod", method_style)
       hl(0, "CmpItemKindProperty", property_style)
       hl(0, "CmpItemKindVariable", variable_style)
+      hl(0, "CmpItemKindModule", property_style)
 
       -- Window separator
       hl(0, "WinSeparator", { fg = colors.primary })
