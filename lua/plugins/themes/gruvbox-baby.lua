@@ -148,9 +148,10 @@ return {
       hl(0, "@function.builtin", function_builtin_style)
       hl(0, "@lsp.typemod.function.defaultLibrary.lua", function_builtin_style)
       hl(0, "@label", lable_style)
-      hl(0, "@text.title", { fg = colors.primary })
+      hl(0, "@text.title", { fg = colors.primary, bold = true })
       hl(0, "@text.emphasis", { fg = colors.primary, italic = true })
       hl(0, "@text.strong", { fg = colors.primary, bold = true })
+      hl(0, "@label", { fg = colors.comment })
 
       -- UI
       hl(0, "VirtColumn", { link = "IndentBlanklineChar" })
