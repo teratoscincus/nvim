@@ -59,7 +59,8 @@ return {
       local function_builtin_style = { fg = colors.orange }
       local interface_style = { fg = colors.soft_green, italic = true }
       local keyword_style = { fg = colors.red }
-      local enum_style = keyword_style
+      local enum_style = { fg = colors.pink }
+      local enum_member_style = constant_style
       local lable_style = { fg = colors.light_blue }
       local method_style = { fg = colors.clean_green }
       local abstract_method_style = { fg = colors.clean_green, italic = true }
@@ -111,13 +112,14 @@ return {
 
       -- Override treesitter & LSP capture groups
       hl(0, "@lsp.type.enum", enum_style)
+      hl(0, "@lsp.type.enumMember", enum_member_style)
       hl(0, "@punctuation.delimiter", punctuation_delimiter_style)
       hl(0, "@punctuation.bracket", punctuation_bracket_style)
       hl(0, "@punctuation.special", punctuation_special_style)
       hl(0, "@operator", operator_style)
       hl(0, "@variable", variable_style)
       hl(0, "@lsp.type.variable", variable_style)
-      hl(0, "@lsp.typemod.property.readonly", constant_style)
+      hl(0, "@lsp.typemod.variable.readonly", constant_style)
       hl(0, "@lsp.type.parameter", variable_style) -- Parameters in method code block
       hl(0, "@parameter", parameter_style)
       hl(0, "@lsp.typemod.parameter.declaration", parameter_style)
